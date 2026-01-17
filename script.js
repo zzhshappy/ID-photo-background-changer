@@ -3,7 +3,10 @@ let originalImageData = null;
 let maskImageData = null;
 let targetColor = '#FFFFFF'; // 默认白色
 let canvas, ctx;
-const API_URL = 'http://localhost:5001/api';
+// 自动检测环境：如果是 localhost 使用本地 API，否则使用相对路径
+const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+    ? 'http://localhost:5001/api' 
+    : '/api';
 
 // 初始化
 document.addEventListener('DOMContentLoaded', function() {

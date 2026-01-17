@@ -142,6 +142,15 @@ def replace_background():
 def health():
     return jsonify({'status': 'ok'})
 
+# 静态文件路由 - 用于部署到生产环境
+@app.route('/')
+def index():
+    return send_file('index.html')
+
+@app.route('/<path:path>')
+def serve_static(path):
+    return send_file(path)
+
 if __name__ == '__main__':
     # 从环境变量获取端口（Railway/Heroku等会设置）
     port = int(os.environ.get('PORT', 5001))
