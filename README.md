@@ -7,9 +7,9 @@ Quickly change the background of your ID photo to any color.
 
 ## 安装说明
 
-1. 安装 Python 依赖：
+1. 克隆或下载项目后，进入项目目录并安装 Python 依赖：
 ```bash
-cd /Users/zhengzaiheshui/codeeeee/证件照
+cd ID-photo-background-changer
 pip3 install -r requirements.txt
 ```
 
