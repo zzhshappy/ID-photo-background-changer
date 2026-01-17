@@ -1,4 +1,6 @@
-# 证件照背景替换工具
+# 证件照背景替换工具 / ID Photo Background Changer
+
+Quickly change the background of your ID photo to any color.
 
 ## 功能说明
 这是一个使用 AI 技术精确识别证件照背景的工具，可以自动识别人物并替换背景颜色。
