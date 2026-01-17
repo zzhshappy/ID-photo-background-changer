@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, send_from_directory
 from flask_cors import CORS
 from rembg import remove, new_session
 from PIL import Image
@@ -14,7 +14,10 @@ import os
 # 3. 处理完成后，Python的垃圾回收会自动清理内存
 # 4. 不记录任何用户图片相关的日志
 
-app = Flask(__name__)
+# 获取当前目录路径
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+app = Flask(__name__, static_folder=current_dir, static_url_path='')
 CORS(app)
 
 # 禁用Flask的请求日志（保护隐私）
@@ -144,11 +147,21 @@ def health():
 # 静态文件路由 - 用于部署到生产环境
 @app.route('/')
 def index():
-    return send_file('index.html')
+    return send_from_directory(current_dir, 'index.html')
 
 @app.route('/<path:path>')
 def serve_static(path):
-    return send_file(path)
+    # 确保 API 路由不被静态文件处理
+    if path.startswith('api/'):
+        return jsonify({'error': 'API endpoint not found'}), 404
+    
+    # 尝试发送请求的文件
+    file_path = os.path.join(current_dir, path)
+    if os.path.exists(file_path) and os.path.isfile(file_path):
+        return send_from_directory(current_dir, path)
+    
+    # 如果文件不存在，返回 index.html（用于 SPA 路由）
+    return send_from_directory(current_dir, 'index.html')
 
 if __name__ == '__main__':
     # 从环境变量获取端口（Railway/Heroku等会设置）
