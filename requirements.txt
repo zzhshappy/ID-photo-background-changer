@@ -1,0 +1,7 @@
+flask
+flask-cors
+rembg[cpu]
+pillow
+numpy
+opencv-python
+gunicorn

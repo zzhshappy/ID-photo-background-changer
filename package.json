@@ -1,0 +1,12 @@
+{
+  "name": "id-photo-background-changer",
+  "version": "1.0.0",
+  "description": "AI-powered ID photo background color changer",
+  "main": "server.py",
+  "scripts": {
+    "start": "gunicorn server:app"
+  },
+  "keywords": ["photo", "background", "ai", "rembg"],
+  "author": "",
+  "license": "MIT"
+}

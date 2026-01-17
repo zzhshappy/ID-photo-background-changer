@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>证件照背景替换工具</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>证件照背景替换工具</h1>
+            <p>轻松更换证件照背景颜色</p>
+        </header>
+
+        <div class="main-content">
+            <!-- 左侧颜色选择区域 -->
+            <aside class="color-panel">
+                <h2>选择背景颜色</h2>
+                <div class="color-options">
+                    <div class="color-item" data-color="#FFFFFF" style="background-color: #FFFFFF;">
+                        <span>白色</span>
+                    </div>
+                    <div class="color-item" data-color="#438EDB" style="background-color: #438EDB;">
+                        <span>蓝色</span>
+                    </div>
+                    <div class="color-item" data-color="#EE3B3B" style="background-color: #EE3B3B;">
+                        <span>红色</span>
+                    </div>
+                    <div class="color-item" data-color="#87CEEB" style="background-color: #87CEEB;">
+                        <span>浅蓝</span>
+                    </div>
+                    <div class="color-item" data-color="#F0F0F0" style="background-color: #F0F0F0;">
+                        <span>灰白</span>
+                    </div>
+                    <div class="color-item" data-color="#4169E1" style="background-color: #4169E1;">
+                        <span>深蓝</span>
+                    </div>
+                </div>
+                
+                <div class="custom-color">
+                    <h3>自定义颜色</h3>
+                    <input type="color" id="customColor" value="#FFFFFF">
+                    <button id="applyCustomColor" class="btn btn-secondary">应用自定义颜色</button>
+                </div>
+
+                <div class="tolerance-control">
+                    <h3>背景识别灵敏度</h3>
+                    <input type="range" id="tolerance" min="10" max="80" value="30">
+                    <span id="toleranceValue">30</span>
+                </div>
+            </aside>
+
+            <!-- 右侧图片处理区域 -->
+            <main class="workspace">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="17 8 12 3 7 8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                        <h3>点击或拖拽上传证件照</h3>
+                        <p>支持 JPG、PNG 格式</p>
+                        <input type="file" id="fileInput" accept="image/jpeg,image/png,image/jpg" hidden>
+                    </div>
+                </div>
+
+                <div class="canvas-container" id="canvasContainer" style="display: none;">
+                    <div class="image-preview-wrapper">
+                        <div class="canvas-wrapper">
+                            <canvas id="canvas"></canvas>
+                            <div id="clickHint" class="click-hint">
+                                正在自动识别背景颜色...
+                            </div>
+                        </div>
+                        
+                        <div class="preview-info" id="previewInfo">
+                            <h3>颜色信息</h3>
+                            <p>检测到的背景色：<span id="selectedBgColor" class="color-preview"></span></p>
+                            <p>目标背景色：<span id="targetBgColor" class="color-preview"></span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button id="resetBtn" class="btn btn-secondary">重新上传</button>
+                        <button id="downloadBtn" class="btn btn-primary">下载照片</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
